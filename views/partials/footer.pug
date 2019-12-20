@@ -1,0 +1,11 @@
+//-partials은 홈페이지의 일부분만 가져옴div
+
+//- footer라는 tag에 footer라는 클래스 정의
+footer.footer
+    .footer_icon    
+        i.fab.fa-youtube
+                //- <i class="fab fa-youtube"></i>
+                //-div.footer_icon이라는 뜻.
+        span.footer_text #{siteName}  #{new Date().getFullYear()} &copy;
+        //- &copy는 browser에서 '©' 문자를 의미 
+            #{} = ${}. js

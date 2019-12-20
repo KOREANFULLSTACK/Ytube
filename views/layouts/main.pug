@@ -1,0 +1,25 @@
+//-
+     컴파일 시 우리의 pug code > html code로 브라우저가 알아먹을 수 있게 rendering 해줌
+     들여쓰기로 상속을 표현하며 
+     main.pug는 git의 branch처럼 형식만 제공함div. 
+     색칠공부처럼 색깔은 비어져있고 틀만 있는 상태. 무슨 색을 채워넣을 수 있음div
+     그럴 때에는 다른pug파일에서 "extends layouts/main 상대경로로 해주면 된다. 확장자X
+     상대경로로 이 main.pug를 지정해두면 지정해둔 모든 파일은 main의 코드롤 복사해서 해당 템플릿이 적용된다.
+
+doctype html
+html
+    head    
+        //- html과 똑같이 head에 fontawsome가져올거 복사해주기.
+        <script src="https://kit.fontawesome.com/e41b5767ec.js" crossorigin="anonymous"></script>
+        title #{siteName}
+        //- title은 이제 siteName으로 대체하며, #{} js코드 삽입. siteName은 middlewares.js에 있다. 
+    body
+        header 
+            include ../partials/header      
+        main
+            block content       
+            //-footer 적용시키기
+            include ../partials/footer
+
+            
+

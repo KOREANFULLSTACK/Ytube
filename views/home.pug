@@ -1,0 +1,12 @@
+//-
+    home.pug가 main.pug의 그림에 색칠하겠다는 의미이며 코드가 복사되었음
+    확장적으로 코드의 추가삽입이 가능하며, extends pug파일경로/파일명   .pug는 default라서 쓰지않아도 됨
+    block에 들어갈 내용들을 채워넣을 수 있다.
+    pug의 상대경로참조는 express의 다른 패키지와 사뭇 다른것으로 보인다. 같은 nodejs기반이지만 
+    패키지가 다르기떄문에 같아야한다는 것은 아니다.
+extends layouts/main
+
+
+block content
+    p This is Home!....
+    

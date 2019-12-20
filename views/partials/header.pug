@@ -1,0 +1,24 @@
+
+header.header
+    .header_column
+            a(href=routes.home)
+                i.fab.fa-youtube
+    .header_column
+        ul
+            li
+                a(href=routes.join) JOIN
+            li
+                a(href=routes.login) LOGIN
+
+    
+//-
+    다른 js파일(routers url)에 있는 변수들을 pug에 가져와 쓰는 방법
+    (url변경이 있을 시, 프로젝트 전체를 수정해야 하는 참사방지책)
+    
+    pug(pug server of view engine from expess) - - - middleware - - - router(express server)
+    우리는 router변수를 pug영역에서도 써야하니까, route변수를 local > global로 변형시킬것이다
+    app.js의 middleware선언한 곳으로 가보자
+
+    1) 한템플릿에 추가시키기
+    
+    2) 전체템플릿에 추가시키기
