@@ -4,8 +4,10 @@
 
 mixin videoBlock(video = {} )
     .videoBlock
-        video.videoBlock_thumbnail(src=video.videoFile, controls = true)
-        h4.videoBlock_title=video.title
-        h6.videoBlock_views=video.views
+        //-VIDEO불러오기.
+        a(href=routes.videoDetail(video.id))
+            video.videoBlock_thumbnail(src=video.videoFile, controls = true)    
+            h4.videoBlock_title=video.title
+            h6.videoBlock_views=video.views
 //-video인자 받은녀석으로 title~videoFile까지 찍을꺼야.
 //- autoplay와 controls = true. src파일 제대로따는법은 db.js참조

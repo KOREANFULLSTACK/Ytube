@@ -30,12 +30,19 @@ const routes = {
   logout: LOGOUT,
   search: SEARCH,
   users: USERS,
-  userDetail: USER_DETAIL,
+  userDetail: id => {
+    if (id) return `${USERS}/${id}`;
+    //id가 있는 경우와 없는 경우가 있다.
+    else return USER_DETAIL; //그래서 userRouter에 routes.userDetail() 매개인자를 안줘도 default로 스마트하게 작동하는 듯
+  },
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
   videos: VIDEOS,
   upload: UPLOAD,
-  videoDetail: VIDEO_DETAIL,
+  videoDetail: id => {
+    if (id) return `${VIDEOS}/${id}`;
+    else return VIDEO_DETAIL;
+  },
   editVideo: EDIT_VIDEO,
   deleteVideo: DELETE_VIDEO
 };

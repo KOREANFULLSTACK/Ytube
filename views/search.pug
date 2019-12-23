@@ -1,5 +1,13 @@
 extends layouts/main
-
+include mixins/videoBlock
+//- videos는 video controller의 import한 videos변수와 같아야함.
 block content
     .search_header
         h3 Searching by #{searchingBy}
+    .search_videos
+        each item in videos
+            +videoBlock({
+                videoFile : item.videoFile,
+                title : item.title,
+                views : item.views
+            })

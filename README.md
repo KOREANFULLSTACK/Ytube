@@ -8,8 +8,8 @@ Cloning Youtube with vanilla and NodeJS
 Markdown Preview : Extensions > markdown install > command Palletes > execute Preview 
 
 - [] Home
-- [] Join
-- [] Login
+- [x] Join
+- [x] Login
 - [x] Search
 - [] userDetail
 - [] Edit Profile

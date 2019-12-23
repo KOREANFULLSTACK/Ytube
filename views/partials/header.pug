@@ -8,11 +8,22 @@ header.header
                 
             input(type="text", placeholder = "Search by term", name ="input")
     .header_column
+        //- html에선 js를 통해 if else해야하지만, pug에서는 호환에서는 가능!
         ul
-            li
-                a(href=routes.join) JOIN
-            li
-                a(href=routes.login) LOGIN
+            if user.isAuthenticated
+                li
+                    a(href=routes.userDetail(user.id)) Profile
+                li 
+                    a(href = `${routes.videos}${routes.upload}`) Upload
+                li
+                    a(href=routes.logout) LogOut
+                
+            else
+                
+                li
+                    a(href=routes.join) Join
+                li
+                    a(href=routes.login) Login
 
 //- form:사용자의 의견/정보등을 알기위해 입력할 '틀'을 만드는데 사용됨.
                     input과 다른 점은 input창 그대로이며, input을 품고있는 게 form임.

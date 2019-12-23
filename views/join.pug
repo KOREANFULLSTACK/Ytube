@@ -4,10 +4,10 @@ extends layouts/main
 block content
     .form-contatiner
         form(action=routes.join, method="post")
-            input(type="text",name="name",placeholder="Full Name")
-            input(type="email",name="email",placeholder="Email")
-            input(type="password",name="password",placeholder="Paswword")
-            input(type="password2",name="password2",placeholder="Verfy Password")
+            input(type="text",name="name",placeholder="Full Name",require=true)
+            input(type="email",name="email",placeholder="Email",require=true)
+            input(type="password",name="password",placeholder="Paswword",require=true)
+            input(type="password2",name="password2",placeholder="Verfy Password",require=true)
             input(type="submit",value = "Join Now")
     
     include ./partials/socialLogin
