@@ -2,7 +2,7 @@
 res.render( 템플릿 , 템플릿에 추가할 정보가 담긴 객체.)
 모든 pug템플릿에는 확장자가 default이기 때문에 그대로 써주어도 된다.
 */
-import { videos } from "../db";
+
 import routes from "../routers/routes";
 //- db에서 가져온 videos 변수와 home.pug에서 쓸 videos 변수를 같게 하자. videos:videos // videos 이렇게 써도 둘다 동작함!
 //  videos : videos 말고 videos 만 써도 가능!!

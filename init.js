@@ -1,10 +1,11 @@
+import "./db";
 import app from "./app";
+import dotenv from "dotenv";
+dotenv.config(); //dotenv파일의 변수들을 전부 불러와주는 메서드. precess.env에 모두 넣기로 한다.
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const handleListening = () =>
-  console.log("listening import on : http://localhost:gg");
-const handleHome = (req, res) => res.send(`hi from home~!`);
+  console.log(`listening import on : http://localhost:${PORT}`);
 
-app.get("/", handleHome);
 app.listen(PORT, handleListening);
