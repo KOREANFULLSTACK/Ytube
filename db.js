@@ -12,9 +12,12 @@
 
 import mongoose from "mongoose"; //DB(C++/NoSql기반) - - - - Bridge - - - - NodeJS(JS기반) 이어주는 녀석이 mongoose.
 import dotenv from "dotenv";
+import video from "./models/Video";
+import comment from "./models/Comment";
 dotenv.config();
 
-/* mongoose.connect("mongodb://localhost:27017/Ytube",{   //mongoose.connect("url", 그 밖의 셋팅);
+/* 
+  mongoose.connect("mongodb://localhost:27017/Ytube",{   //mongoose.connect("url", 그 밖의 셋팅);
   useNewUrlParser: true,
   useFindAndModify: false
 }); */
@@ -33,3 +36,6 @@ const handleError = () => console.log("XXXX");
 
 db.once("open", handleOpen);
 db.on("error", handleError);
+
+console.log(video);
+console.log(comment);

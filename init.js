@@ -9,3 +9,9 @@ const handleListening = () =>
   console.log(`listening import on : http://localhost:${PORT}`);
 
 app.listen(PORT, handleListening);
+
+/* 
+  프로그램 순서상, db가 먼저 import되므로 connecting db문구가 먼저 찍혀야 되지 않을까?
+  하지만 그렇지 않은 이유는 DB서버와 연결하는 건 시간이 꽤 오래걸리기 때문에 asnc 특성으로
+  한번에 많은 일을 처리하기 때문에 listen먼저 찍고 그 후에 db가 찍힌다.
+*/
