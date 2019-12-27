@@ -1,6 +1,8 @@
 import routes from "./routers/routes"; //default export라서 파일전체 접근가능. 접근할 땐 routes.~~이렇게
-
+import multer from "multer";
 //res.locals에 대한 api문서 : https://expressjs.com/ko/api.html#res.locals에 나와있듯이, views폴더내 프로젝트파일들만 접근가능.
+
+const multerVideo = multer({ dest: "uploads/videos/" });
 
 export const localsMiddleware = (req, res, next) => {
   /*
@@ -16,3 +18,6 @@ export const localsMiddleware = (req, res, next) => {
   };
   next(); //안해주면 다음 middleware로 죽, app.use(global blabla..)로 못넘어가서 무한로딩뜸.
 };
+
+export const uploadVideo = multerVideo.single(`videoFile`);
+//single은 오직 하나의 파일만 올릴수 있음. 'videoFile은 upload의 file의 name변수

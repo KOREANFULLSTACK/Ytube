@@ -1,13 +1,14 @@
-//-웹 페이지엫서 반복되는 코드들을 만들꺼임
-    mixin은 pug의 함수. parameter가 하나 필요한대, 이 파라미터는 다른 pug에서 받아올꺼야 
-    같은구조 다른 데이터 우리는 복붙을 하지 않을 것이다
-
+//- 웹 페이지엫서 반복되는 코드들을 만들꺼임
+    mixin은 pug의 함수. parameter가 하나 필요하고 인자를 입력하면, video라는 녀석으로 받을꺼고
+    이 파라미터, 즉 인자는 다른 pug에서 갖다쓸꺼야. VideoBlock은 여기에 계속 머물것이며,
+    다른 home.pug 다른 template에서 videoBlock을 갖다쓸꺼야.
+    
 mixin videoBlock(video = {} )
     .videoBlock
         //-VIDEO불러오기.
         a(href=routes.videoDetail(video.id))
-            video.videoBlock_thumbnail(src=video.videoFile, controls = true)    
+            video.videoBlock_thumbnail(src=video.url, controls = true)    
             h4.videoBlock_title=video.title
             h6.videoBlock_views=video.views
-//-video인자 받은녀석으로 title~videoFile까지 찍을꺼야.
-//- autoplay와 controls = true. src파일 제대로따는법은 db.js참조
+//- 다른 템플릿으로부터 video를 받아 title~videoFile까지 찍을꺼야.
+    autoplay와 controls = true. src파일 제대로따는법은 db.js참조

@@ -23,8 +23,8 @@ export const home = async (req, res) => {
   try {
     //try 실행해보고 에러가 있으면 catch로 빤스런.
     const videos = await Video.find({}); //Video.find({})은 Video에 있는 모든 데이터를 array가져와 리턴한다.
-    //throw Error("lalala"); //이걸로 프로그램 동작을 멈출 수 있음. 하지만 우린 try catch를 썼으니 catch로 달아날꺼야. 그러곤 에러를 찍고 render을 해서 웹페이지가 동작이 되도록하겠지.
-    console.log(videos);
+    //throw Error("lalala"); //이걸로 프로그램 동작을 멈출 수 있음. 하지만 우린 try catch를 썼으니 catch로 달아날꺼야. 그러곤 에러를 찍고 render을  해서 웹페이지가 동작이 되도록하겠지.
+
     res.render("home", { pageTitle: "Home", videos: videos });
   } catch (error) {
     console.log("에러");
@@ -35,22 +35,66 @@ export const home = async (req, res) => {
 export const upload = (req, res) =>
   res.render("upload", { pageTitle: "upload" });
 
-export const postUpload = (req, res) => {
+//한번 락을 걸어주자
+export const postUpload = async (req, res) => {
   const body = {
-    file: req.body.file,
+    //upload의 pug파일의 name속성들과 일치해야함.
     title: req.body.title,
-    description: req.body.description
+    description: req.body.descript
   };
-  //To do upload and save video
-  console.log(body);
-  res.redirect(routes.videoDetail(324393));
+  const file = {
+    path: req.file.path
+  };
+
+  //create되기전에 다른액션으로 넘어가버리면 create가 안될 수도 있기 떄문에
+  const newVideo = await Video.create({
+    fileUrl: file.path,
+    title: body.title,
+    description: body.description
+  });
+
+  res.redirect(routes.videoDetail(newVideo.id));
 };
 
-export const videoDetail = (req, res) =>
-  res.render("videoDetail", { pageTitle: "videoDetail" });
+//해당비디오가 DB에서 찾고 로딩될때까지 기다려줘
+export const videoDetail = async (req, res) => {
+  try {
+    let id = req.params.id; //url의 id/name/user같은 부분들을 파싱해줌.
+    const video = await Video.findById(id); //Video중에서 Id로 찾는 행위를 기다려줘
 
-export const editVideo = (req, res) =>
-  res.render("editVideo", { pageTitle: "editVideo" });
+    res.render("videoDetail", { pageTitle: "detail", video });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+//video 수정할 때 그 video를 불러오지않으면 없는 video를 수정하게 되는 거니까 로딩락해주자.
+export const editVideo = async (req, res) => {
+  const id = req.params.id;
+  //routes에서 이미 url다 작업해놨으니 editVideo에 들어오면 req.params로 파싱이 가능함.
+  console.log(id);
+  try {
+    const video = await Video.findById(id);
+    console.log(video);
+    res.render("editVideo", { pageTitle: "Edit", video }); //{video}로 안주면 pug파일에서 인식을 못하더라.
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+export const postEditVideo = async (req, res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const description = req.body.description;
+  console.log(req.body);
+  try {
+    //몽고DB는 기본적으로 _id를 가지고, pug가 똑똑해서 _id를 id로 넘겨줘도 인식이 가능했었던 것.
+    await Video.findOneAndUpdate({ _id: id }, { title: title, description });
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 
 export const deleteVideo = (req, res) =>
   res.render("deleteVideo", { pageTitle: "deleteVideo" });

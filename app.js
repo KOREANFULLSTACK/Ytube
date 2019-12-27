@@ -16,12 +16,21 @@ const app = express(); //import한 express를 인스턴트로 만듬
 
 app.use(helmet()); //미들웨어를 조금 더 안전하게 헬멧을 씌움
 app.set(`view engine`, "pug");
-//express의 application 설정을 바꿔주는 메소드.
-//app.set("property"," "); 지금의경우는 디폴트인 view engine을 pug로 세팅한다
-//property는 express api참조 사이트의 app.set란에 많음
-//pug는 express의 view engine의 템플릿언어. 우리는 view engine으로 pug를 사용하겟다.
-//pug는 확장자가 .pug이며 views폴더에서 html대신 pug로 작업한다.
-//그리고 views engine이 pug파일을 찾으러다닐꺼다
+/*
+    express의 application 설정을 바꿔주는 메소드.
+    app.set("property"," "); 지금의경우는 디폴트인 view engine을 pug로 세팅한다
+    property는 express api참조 사이트의 app.set란에 많음
+    pug는 express의 view engine의 템플릿언어. 우리는 view engine으로 pug를 사용하겟다.
+    pug는 확장자가 .pug이며 views폴더에서 html대신 pug로 작업한다.
+    그리고 views engine이 pug파일을 찾으러다닐꺼다
+
+/*
+    img,video의 처리과정 
+        비디오업로드(fileUrl / id) > 디렉토리에 해당파일 저장 > 미들웨어가 디렉토리탐색후 유저에게 제공
+    지금이 마지막과정이며, 디렉토리 내의 경로에 대해서는 최상위디렉토리인 /uploads로 마운팅한 후
+    uploads에 해당되어있는 모든 디렉토리를 허용해서 제공해준다.
+*/
+app.use("/uploads", express.static("./uploads"));
 
 app.use(cookieParser());
 app.use(bodyParser.json());

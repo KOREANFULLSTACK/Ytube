@@ -12,15 +12,13 @@ block content
     .videos
         each item in videos
             +videoBlock({
-                id:item.id,
+                id : item.id,
+                url:item.fileUrl,
                 title:item.title,
                 views: item.views,
-                videoFile : item.videoFile
-
             })
-    //- each 아무거나 내맘대로 변수명 in videos controller에서 import한 걸 배열로 고스란히 받은 거.
-    //- videos들을 사용자에게 보여줘야 하니까, 비디오 블럭을 구현하는 코드를 파일로 만들어서 쓰자 mixin 참조
+    //- each 아무거나 내맘대로 변수명 in videos videoController에서 import Video DB로부터 가져온 걸 home에 넘겨줌.
+        Controller에 있는 변수와 template에서 쓸 녀석 이름이 무조건 같아야 함.
+     videos들을 사용자에게 보여줘야 하니까, 비디오 블럭을 구현하는 코드를 파일로 만들어서 쓰자 mixin 참조
 
-    //-     title : item.title
-            views : ${item.views}
-            이렇게 쓰니 까 오류가 났어. 오류가 난 이유는 videoBlock.pug에서 h1 = ~ 이렇게 썼었음. #{} 이거쓰자. 텍스트잖아
+    
