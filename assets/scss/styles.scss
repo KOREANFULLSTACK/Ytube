@@ -1,0 +1,8 @@
+body {
+  background-color: red;
+}
+@import "config/_variables.scss";
+
+body {
+  background-color: $sexyColor;
+}

@@ -22,7 +22,7 @@ export const home = async (req, res) => {
   */
   try {
     //try 실행해보고 에러가 있으면 catch로 빤스런.
-    const videos = await Video.find({}); //Video.find({})은 Video에 있는 모든 데이터를 array가져와 리턴한다.
+    const videos = await Video.find({}).sort({ _id: -1 }); //Video.find({})은 Video에 있는 모든 데이터를 array가져와 리턴한다.
     //throw Error("lalala"); //이걸로 프로그램 동작을 멈출 수 있음. 하지만 우린 try catch를 썼으니 catch로 달아날꺼야. 그러곤 에러를 찍고 render을  해서 웹페이지가 동작이 되도록하겠지.
 
     res.render("home", { pageTitle: "Home", videos: videos });
@@ -37,6 +37,7 @@ export const upload = (req, res) =>
 
 //한번 락을 걸어주자
 export const postUpload = async (req, res) => {
+  //post = body로 쉽게추출이 가능! body는 nodejs의 post용 파라미터추출모듈 packagejson에가면 body-pareser깔려있음
   const body = {
     //upload의 pug파일의 name속성들과 일치해야함.
     title: req.body.title,
@@ -61,8 +62,7 @@ export const videoDetail = async (req, res) => {
   try {
     let id = req.params.id; //url의 id/name/user같은 부분들을 파싱해줌.
     const video = await Video.findById(id); //Video중에서 Id로 찾는 행위를 기다려줘
-
-    res.render("videoDetail", { pageTitle: "detail", video });
+    res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -72,11 +72,9 @@ export const videoDetail = async (req, res) => {
 export const editVideo = async (req, res) => {
   const id = req.params.id;
   //routes에서 이미 url다 작업해놨으니 editVideo에 들어오면 req.params로 파싱이 가능함.
-  console.log(id);
   try {
     const video = await Video.findById(id);
-    console.log(video);
-    res.render("editVideo", { pageTitle: "Edit", video }); //{video}로 안주면 pug파일에서 인식을 못하더라.
+    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video }); //{video}로 안주면 pug파일에서 인식을 못하더라.
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -96,15 +94,32 @@ export const postEditVideo = async (req, res) => {
   }
 };
 
-export const deleteVideo = (req, res) =>
-  res.render("deleteVideo", { pageTitle: "deleteVideo" });
+export const deleteVideo = async (req, res) => {
+  const id = req.params.id;
+  //const video = await Video.findById(id);
+  //await Video.remove{(id)};
+  try {
+    await Video.findOneAndRemove({ _id: id });
+  } catch (error) {
+    return;
+  }
+  res.redirect(routes.home);
+};
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   console.log(req.query);
+  let searchingBy = req.query.input;
 
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }
+    });
+    //JS내장의 정규표현식 regex는 단어가 포함되어있는 녀석들을 찾아주는 것이며, option : i는 덜 민감intensive하단 것으로 대소문자 구별X
+  } catch (error) {}
   res.render("search", {
-    searchingBy: req.query.input, //req.query.input middleware.js참조 검색창의 value
-    videos, //db.js참조
+    searchingBy, //req.query.input middleware.js참조 검색창의 value
+    videos,
     pageTitle: "Search Man"
   });
 };

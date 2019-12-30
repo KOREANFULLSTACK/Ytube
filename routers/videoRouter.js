@@ -17,6 +17,6 @@ videoRouter.post(routes.upload, uploadVideo, postUpload);
 videoRouter.get(routes.videoDetail(), videoDetail);
 videoRouter.get(routes.editVideo(), editVideo);
 videoRouter.post(routes.editVideo(), postEditVideo);
-videoRouter.get(routes.deleteVideo, deleteVideo);
-
+videoRouter.get(routes.deleteVideo(), deleteVideo);
+//get(url, controller)이라는 형식이며, routes.editVideo()는 url에 id를 넘겨주는 String function임.
 export default videoRouter;

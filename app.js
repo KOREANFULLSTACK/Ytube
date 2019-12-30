@@ -27,10 +27,11 @@ app.set(`view engine`, "pug");
 /*
     img,video의 처리과정 
         비디오업로드(fileUrl / id) > 디렉토리에 해당파일 저장 > 미들웨어가 디렉토리탐색후 유저에게 제공
-    지금이 마지막과정이며, 디렉토리 내의 경로에 대해서는 최상위디렉토리인 /uploads로 마운팅한 후
-    uploads에 해당되어있는 모든 디렉토리를 허용해서 제공해준다.
+        지금이 마지막과정이며, 디렉토리 내의 경로에 대해서는 최상위디렉토리인 /uploads로 마운팅한 후
+        uploads에 해당되어있는 모든 디렉토리를 허용해서 제공해준다.
 */
-app.use("/uploads", express.static("./uploads"));
+app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 
 app.use(cookieParser());
 app.use(bodyParser.json());

@@ -20,4 +20,4 @@ export const localsMiddleware = (req, res, next) => {
 };
 
 export const uploadVideo = multerVideo.single(`videoFile`);
-//single은 오직 하나의 파일만 올릴수 있음. 'videoFile은 upload의 file의 name변수
+//single은 오직 하나의 파일만 올릴수 있음. 'videoFile은 upload의 file의 name변수 video url을 의미.
