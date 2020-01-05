@@ -1,12 +1,15 @@
 
 header.header
     .header_column
-            a(href=routes.home)
-                i.fab.fa-youtube
+        
+        a(href=routes.home, id ="Ytube")
+            i.fab.fa-youtube.fa-2x
+            span YTube
+        
     .header_column
         form(action=routes.search, method ="get")
                 
-            input(type="text", placeholder = "Search by term", name ="input")
+            input(type="text", placeholder = " Search by term...", name ="input")
     .header_column
         //- html에선 js를 통해 if else해야하지만, pug에서는 호환에서는 가능!
         ul

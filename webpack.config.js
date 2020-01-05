@@ -52,7 +52,7 @@ const config = {
     path: OUTPUT_DIR,
     filename: "[name].js"
   },
-  plugin: [new ExcreactCSS("styles.css")]
+  plugins: [new ExcreactCSS("styles.css")]
 };
 
 module.exports = config;

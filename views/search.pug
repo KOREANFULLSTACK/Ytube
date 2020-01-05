@@ -2,15 +2,16 @@ extends layouts/main
 include mixins/videoBlock
 //- videos는 video controller의 import한 videos변수와 같아야함.
 block content
-    .search_header
-        h3 Searching by #{searchingBy}
-    .search_videos
-        if videos.length === 0
-            h5 No Videos related with #{searchingBy}
-        each item in videos
-            +videoBlock({
-                id : item._id,
-                url : item.fileUrl,
-                title : item.title,
-                views : item.views
-            })
+    .video
+        .search_videos
+            h3 Searching by #{searchingBy}
+            if videos.length === 0
+                h5 No Videos related with #{searchingBy}
+            each item in videos
+                +videoBlock({
+                    id : item._id,
+                    url : item.fileUrl,
+                    title : item.title,
+                    views : item.views
+                })
+    

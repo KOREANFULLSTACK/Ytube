@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  background-color: peru;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+
+  .header_column {
+    input {
+      padding: 5px;
+      width: 250px;
+      font-family: "Fira Sans Condensed", sans-serif;
+      color: grey;
+    }
+    a {
+      margin: 10px;
+      color: white;
+      text-decoration: none;
+    }
+    margin: 7px;
+    padding: 7px;
+    span {
+      margin: 5px;
+      font-size: 26px;
+    }
+    ul {
+      margin: 7px;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}

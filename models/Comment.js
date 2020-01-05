@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const CommentSchema = mongoose.Schema({
+  user: {
+    type: String,
+    required: "user is required"
+  },
   text: {
     type: String,
     required: "Text is required"

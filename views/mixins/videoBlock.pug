@@ -8,7 +8,7 @@ mixin videoBlock(video = {} )
         //-VIDEO불러오기.
         a(href=routes.videoDetail(video.id))
             video.videoBlock_thumbnail(src=video.url, controls = true)    
-            h4.videoBlock_title=video.title
-            h6.videoBlock_views=video.views
+            span.videoBlock_title=video.title
+            span.videoBlock_views 조회수 #{video.views}
 //- 다른 템플릿으로부터 video를 받아 title~videoFile까지 찍을꺼야.
     autoplay와 controls = true. src파일 제대로따는법은 db.js참조

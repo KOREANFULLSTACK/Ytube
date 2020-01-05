@@ -1,16 +1,18 @@
-extends layouts/main
+extends ./layouts/main
 
 block content
     .form-container
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
-            label(for='file') Video File
+            label(for='file') 
+                h3 Video File
             //- label의 주요속성은 for이다. label의 for값과 어느 태그의 id값이 같으면 '연결'된다.
                 이 경우에서는 label과 input의 file타입과 연결이 된다. 즉, input버튼을 누르지 않고
                 label태그의 file이라는 문자열 클릭으로도 input이 대응되서 클릭이 되어진다는 이야기
 
                 accept=video는 video가 아닌 파일들은 아예 보이지도 않게 된다.
-            input(type = "file", id="file", name="videoFile",require=true, accept="video/*")    
-            input(type="text", name="title", placeholder="Title",require=true)
+            input(type = "file", id="file", name="videoFile",require=true, accept="video/*")
+                  
+            input.upload-title(type="text", name="title", placeholder="Title",require=true)
             textarea(name="descript", placeholder="Description",require=true)
             input(type="submit", value ="Upload Video")
 
