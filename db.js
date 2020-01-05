@@ -14,6 +14,8 @@ import mongoose from "mongoose"; //DB(C++/NoSql기반) - - - - Bridge - - - - No
 import dotenv from "dotenv";
 import video from "./models/Video";
 import comment from "./models/Comment";
+import user from "./models/User";
+
 dotenv.config();
 
 /* 
@@ -40,3 +42,4 @@ db.on("error", handleError);
 
 console.log(video);
 console.log(comment);
+console.log(user);

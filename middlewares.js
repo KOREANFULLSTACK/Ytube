@@ -13,7 +13,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "YTube";
   res.locals.routes = routes;
   res.locals.user = {
-    isAuthenticated: true,
+    isAuthenticated: false,
     id: 1
   };
   next(); //안해주면 다음 middleware로 죽, app.use(global blabla..)로 못넘어가서 무한로딩뜸.
