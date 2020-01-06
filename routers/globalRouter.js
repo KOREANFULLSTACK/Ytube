@@ -18,7 +18,7 @@ globalRouter.get(routes.home, home);
 globalRouter.get(routes.join, join);
 
 // action post요청에 대한 응답. join.pug form참조
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin, postLogin);
 
 globalRouter.get(routes.login, login);
 globalRouter.post(routes.login, postLogin);

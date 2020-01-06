@@ -1,9 +1,14 @@
 /*  passport local mongoose 사용법
-        
-        0. passport-local-mongoose와 DB의 해당 스키마 플러그인(컨센트끼우기) User.js
-        
-        1. passport/ Passport-local을 구성해야한다.
-        2. LocalStrategy(인증하는 방법)와 serializeUser/ deserializeUser 구현
+        유저모델 생성 -> passport 선언 -> passport-local 기본설정 -> 사용
+
+
+        0. passport-local-mongoose와 User의 해당 스키마 플러그인(컨센트끼우기) User.js
+        1. passport-local-mongoose와 User스키마 설정한 걸 create하기.
+        2. LocalStrategy와 serializeUser/ deserializeUser 구현
+        3. passport선언  
+            *app.use(passport. ~~ ) 
+            *import "passport" from "passport";
+            *import "./passport";
 
 */
 

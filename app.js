@@ -3,6 +3,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import passport from "passport";
+import session from "express-session";
 //node js 의 npm package import
 
 import routes from "./routers/routes";
@@ -10,6 +12,8 @@ import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
+
+import "./passport";
 // my project import
 
 const app = express(); //import한 express를 인스턴트로 만듬
@@ -41,6 +45,16 @@ app.use(morgan("dev"));
 /* app.use((req,res,next)=>{
         바로 인자에 function 만들기. 편한방법대로 해.
 })*/
+
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //router의 변수를 header.pug로 가져와서 사용할 녀석. 먼저, middlewares.js만들고 middlewares.js를 임포트하자
 //이제부터 local변수를 global변수처럼 쓸꺼야! 궁금하다면 localsMiddlesware참조해
