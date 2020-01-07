@@ -1,12 +1,10 @@
-//로그인버튼과 Join화면에 모두 띄워야할 필요가 있으므로 만들어두자
-
-
 .social-loggin
     form
         button.social-login_github
-            span
-                i.fab.fa-github
-            |Continue with Github
+            a(href=routes.github)
+                span
+                    i.fab.fa-github
+                |Continue with Github
 
         button.social-login_facebook
             span

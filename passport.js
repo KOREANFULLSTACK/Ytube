@@ -14,9 +14,27 @@
 
 import passport from "passport";
 import User from "./models/User";
-
+import GitHubStrategy from "passport-github";
+import dotenv from "dotenv";
+import routes from "./routers/routes";
+import { githubCallback } from "./controllers/userController";
 //User모델(DB)과 email을 통한 '인증방식'으로 연결.
-passport.use(User.createStrategy());
+dotenv.config();
+
+passport.use(User.createStrategy()); //전략생성
+passport.use(
+  new GitHubStrategy(
+    {
+      //https://github.com/settings/applications/new등록한 후 얻는 ID/Secret. .env로 은닉시키자
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: `http://localhost:4000${routes.githubCallback}`
+    },
+
+    //인증을 받고 사용자가 깃헙으로부터 우리YTube로 돌아왔을 떄 github의 정보를 받는 함수
+    githubCallback
+  )
+);
 
 /*
     serialization : 통신할 때 object단위로 데이터를 보낼 수 없기 때문에 

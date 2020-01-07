@@ -8,7 +8,7 @@
     width: 100%;
     max-width: 320px;
     margin: 40px 0px 40px;
-
+    text-decoration: none;
     label {
       text-align: center;
       font-size: 20px;
@@ -41,15 +41,15 @@
       background-color: #a5aa94;
     }
   }
-  a {
-    text-decoration: none;
-  }
 }
 .social-loggin {
   form {
     .social-login_github {
       color: white;
       background-color: #133337;
+      a {
+        text-decoration: none;
+      }
     }
     .social-login_facebook {
       color: white;

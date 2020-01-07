@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import session from "express-session";
+import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
 //node js 의 npm package import
 
 import routes from "./routers/routes";
@@ -17,6 +19,9 @@ import "./passport";
 // my project import
 
 const app = express(); //import한 express를 인스턴트로 만듬
+
+//서버가 종료되면 쿠키가 사라지게 되니 쿠키를 저장할 수 있는 몽고DB의 저장소에 저장하자.
+const CookieStore = MongoStore(session);
 
 app.use(helmet()); //미들웨어를 조금 더 안전하게 헬멧을 씌움
 app.set(`view engine`, "pug");
@@ -49,8 +54,10 @@ app.use(morgan("dev"));
 app.use(
   session({
     secret: "keyboard cat",
+    cookie: { maxAge: 60 * 60 * 1000 },
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection }) //쿠키 Store의 가장 중요한 부분. 몽고와 연결해줘야 몽고 저장소에 저장가능함.
   })
 );
 app.use(passport.initialize());

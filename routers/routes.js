@@ -15,6 +15,10 @@ const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
 const USER_DETAIL = "/:id"; // /users/1 : 1번 유저를 줌.
 
+//github
+
+const GITHUB = "/auth/github";
+const GITHUBCALLBACK = "/auth/github/callback";
 //Videos
 
 const VIDEOS = "/videos";
@@ -37,6 +41,10 @@ const routes = {
   },
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
+
+  github: GITHUB,
+  githubCallback: GITHUBCALLBACK,
+
   videos: VIDEOS,
   upload: UPLOAD,
   videoDetail: id => {
@@ -47,10 +55,7 @@ const routes = {
     if (id) return `${VIDEOS}/${id}/edit`;
     else return EDIT_VIDEO;
   },
-  /* editVideo: id => {
-    if (id) return `${VIDEOS}${id}/edit`;
-    else EDIT_VIDEO;
-  }, */
+
   deleteVideo: id => {
     if (id) return `${VIDEOS}/${id}/delete`;
     else return DELETE_VIDEO;

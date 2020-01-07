@@ -26,10 +26,16 @@ export const postJoin = async (req, res, next) => {
     res.status(400);
   } else {
     try {
-      const user = await User.create({
+      /* const user = await User.create({
         name,
         email
-      });
+      }); */
+
+      const user = {
+        name,
+        email
+      };
+
       await User.register(user, password);
       next();
     } catch (error) {
@@ -52,8 +58,48 @@ export const postLogin = passport.authenticate(`local`, {
     그렇다면 postJoin에서 받은 정보를 postLogin에서 계승 가능한 걸까? 이것이 미들웨어 특성인가?
   */
 
+export const githubLogin = passport.authenticate("github");
+
+//깃헙이동 후 김님으로 계속하시겠습니까? 의 화면에서 "예"를 누르면 동작되는 함수. 로그인 된 후 로그인 세션을 YTube 로 주고 callback url로 이동시킴.
+export const githubCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  const id = profile._json.id;
+  const avatarUrl = profile._json.avatar_url;
+  const name = profile._json.name;
+  const email = profile._json.email;
+  try {
+    const user = await User.findOne({ email }); //email로 유저찾기
+    //user가 존재하면 로그인.
+    if (user) {
+      user.githubId = id;
+      user.save();
+      console.log(user);
+      return cb(null, user);
+    } else {
+      const newUser = await User.create({
+        email,
+        name,
+        githubId: id,
+        avatarUrl
+      });
+
+      return cb(null, newUser);
+    }
+  } catch (error) {
+    return cb(error);
+  }
+};
+
+export const postGithubLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) => {
-  //To do: rocess logout
+  req.logout();
   res.redirect(routes.home);
 };
 
@@ -67,3 +113,5 @@ export const editProfile = (req, res) =>
 
 export const changePassword = (req, res) =>
   res.render("change PW", { pageTitle: "Change Password" });
+
+//깃헙으로 이동 후, 깃헙에서의 '김님으로 계속하시겠습니까' 라는 것을 실행시켜주는 passport의 메소드인듯.

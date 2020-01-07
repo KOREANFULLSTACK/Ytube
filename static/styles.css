@@ -413,7 +413,8 @@ body {
   font-family: "Fira Sans Condensed", sans-serif;
   background-color: white; }
   body main {
-    margin: 40px 0px 40px; }
+    margin: 40px 0px 40px;
+    text-decoration: none; }
 
 .header {
   width: 100%;
@@ -469,7 +470,8 @@ body {
   .social-loggin form {
     width: 100%;
     max-width: 320px;
-    margin: 40px 0px 40px; }
+    margin: 40px 0px 40px;
+    text-decoration: none; }
     .form-container form label,
     .social-loggin form label {
       text-align: center;
@@ -503,13 +505,12 @@ body {
     .social-loggin form .last-input {
       color: white;
       background-color: #a5aa94; }
-  .form-container a,
-  .social-loggin a {
-    text-decoration: none; }
 
 .social-loggin form .social-login_github {
   color: white;
   background-color: #133337; }
+  .social-loggin form .social-login_github a {
+    text-decoration: none; }
 
 .social-loggin form .social-login_facebook {
   color: white;

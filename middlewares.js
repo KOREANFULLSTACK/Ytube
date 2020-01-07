@@ -18,11 +18,26 @@ export const localsMiddleware = (req, res, next) => {
   */
   res.locals.siteName = "YTube";
   res.locals.routes = routes;
-  res.locals.user = req.user || {};
+  res.locals.user = req.user || null;
   //req.user는 어디서 왔나? 얘는 app.js의 app.use(passort.initialize()를 써두면 정보들이 req.user로 들어가게 설정되있음.)
-  console.log(req.user);
   next();
   //안해주면 다음 middleware로 죽, app.use(global blabla..)로 못넘어가서 무한로딩뜸.
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
 };
 
 export const uploadVideo = multerVideo.single(`videoFile`);
