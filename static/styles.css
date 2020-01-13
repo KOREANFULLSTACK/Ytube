@@ -431,9 +431,14 @@ body {
       font-family: "Fira Sans Condensed", sans-serif;
       color: grey; }
     .header .header_column a {
+      display: flex;
       margin: 10px;
       color: white;
       text-decoration: none; }
+      .header .header_column a img {
+        margin-right: 5px;
+        width: 28px;
+        height: 18px; }
     .header .header_column span {
       margin: 5px;
       font-size: 26px; }
@@ -507,14 +512,17 @@ body {
       background-color: #a5aa94; }
 
 .social-loggin form .social-login_github {
-  color: white;
   background-color: #133337; }
   .social-loggin form .social-login_github a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: white; }
 
 .social-loggin form .social-login_facebook {
   color: white;
   background-color: #1d5692; }
+  .social-loggin form .social-login_facebook a {
+    text-decoration: none;
+    color: white; }
 
 .social-loggin span {
   font-weight: 400;
@@ -583,7 +591,8 @@ body {
 .videos {
   margin: 30px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
+  grid-template-columns: repeat(4, 400px);
+  justify-content: center;
   grid-gap: 10px;
   align-items: center;
   width: 100%;
@@ -598,6 +607,9 @@ body {
       text-decoration: none;
       margin: 15px;
       font-size: 30px; }
+    .videos .videoBlock .videoBlock_thumbnail {
+      height: 300px;
+      width: 400px; }
     .videos .videoBlock .videoBlock_title,
     .videos .videoBlock h5 {
       margin-top: 20px;
@@ -645,3 +657,21 @@ body {
 .search_videos h3 {
   margin: 20px;
   font-size: 20px; }
+
+.userDetail {
+  margin: 10px; }
+  .userDetail img {
+    border: 1px;
+    border-radius: 10px;
+    padding: 3px;
+    width: 300px;
+    height: 400px; }
+  .userDetail p {
+    margin: 10px;
+    font-size: 16px; }
+  .userDetail a {
+    text-decoration: null; }
+    .userDetail a span {
+      text-decoration: null;
+      font-size: 22px;
+      margin: 5px; }

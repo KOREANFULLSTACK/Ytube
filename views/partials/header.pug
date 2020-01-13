@@ -11,9 +11,12 @@ header.header
     .header_column
         //- html에선 js를 통해 if else해야하지만, pug에서는 호환에서는 가능!
         ul
-            if user
+            if loggedUser
                 li
-                    a(href=routes.userDetail(user.id)) Profile
+                    a(href=routes.userDetail(loggedUser.id)) 
+                        img(src=loggedUser.avatarUrl )
+                        p Profile
+
                 li 
                     a(href = `${routes.videos}${routes.upload}`) Upload
                 li

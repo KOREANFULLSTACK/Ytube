@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 4000;
 const handleListening = () =>
   console.log(`listening import on : http://localhost:${PORT}`);
 
-app.listen(PORT, handleListening);
+app.listen(PORT, "127.0.0.1", handleListening);
 
 /* 
   프로그램 순서상, db가 먼저 import되므로 connecting db문구가 먼저 찍혀야 되지 않을까?

@@ -1,5 +1,9 @@
 extends layouts/main
 
 block content
-    a.form-container_link(href=routes.changePassword) Change Password
-    h1 ㅇㅁㄴㅇㄴ
+     .form-contatiner
+        form(action =`${routes.changePassword(user._id)}`, method = "post")
+            input(type="password", placeholder="old password", name="password1")
+            input(type="password", placeholder="new password", name="password2")
+            input(type="submit",value="change Password") 
+        

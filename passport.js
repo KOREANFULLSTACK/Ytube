@@ -14,15 +14,24 @@
 
 import passport from "passport";
 import User from "./models/User";
+import LocalStrategy from "passport-local";
 import GitHubStrategy from "passport-github";
+import NaverStrategy from "passport-naver";
 import dotenv from "dotenv";
 import routes from "./routers/routes";
-import { githubCallback } from "./controllers/userController";
+import { githubCallback, naverCallback } from "./controllers/userController";
 //User모델(DB)과 email을 통한 '인증방식'으로 연결.
 dotenv.config();
 
-passport.use(User.createStrategy()); //전략생성
+/*
+  passport.use(new LocalStrategy(User.authenticate()));
+  나는 이 방법이 new도 있고 다른 passport configure와 비슷해서 이거 사용했었는데
+  new LocalStrategy가 먹히는 건 namefiled option에 손 안댔을 때만, 우리는 email로 바꿨으므로
+  User.createStrategy()를 써야한다.
+*/
+passport.use(User.createStrategy());
 passport.use(
+  //passport-github 전용전략을 '만들'었다. 사용하는 것과 만드는 건 엄연히 다르다 뭘 의미하고 어떤 동작이 일어나는지.
   new GitHubStrategy(
     {
       //https://github.com/settings/applications/new등록한 후 얻는 ID/Secret. .env로 은닉시키자
@@ -36,12 +45,25 @@ passport.use(
   )
 );
 
+passport.use(
+  new NaverStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: `http://127.0.0.1:4000${routes.naverCallback}`,
+      svcType: 0 // optional. see http://gamedev.naver.com/index.php/%EC%98%A8%EB%9D%BC%EC%9D%B8%EA%B2%8C%EC%9E%84:OAuth_2.0_API
+    },
+    naverCallback
+  )
+);
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 /*
     serialization : 통신할 때 object단위로 데이터를 보낼 수 없기 때문에 
     통신에 적합한 용기/포장을 해서 데이터를 송신함.
     반대로 수신측에서는 deserialization으로 언박싱해서 정보를 얻음.
 */
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 //쿠키에 id를 담고 그 id로 유저를 찾는다

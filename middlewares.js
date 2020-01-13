@@ -18,7 +18,7 @@ export const localsMiddleware = (req, res, next) => {
   */
   res.locals.siteName = "YTube";
   res.locals.routes = routes;
-  res.locals.user = req.user || null;
+  res.locals.loggedUser = req.user || null;
   //req.user는 어디서 왔나? 얘는 app.js의 app.use(passort.initialize()를 써두면 정보들이 req.user로 들어가게 설정되있음.)
   next();
   //안해주면 다음 middleware로 죽, app.use(global blabla..)로 못넘어가서 무한로딩뜸.

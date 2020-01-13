@@ -1,4 +1,14 @@
 extends layouts/main
 
 block content
-    p #{user.name}님 환영합니다
+    
+    .userDetail
+        img(src=user.avatarUrl)
+        
+        p name : #{user.name}
+        p e-mail: #{user.email}
+        a(href=routes.editProfile(user.id))
+            i.fas.fa-pen-square.fa-2x
+            span Edit Profile
+        
+        

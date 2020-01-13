@@ -2,10 +2,10 @@ extends layouts/main
 
 block content
      .form-contatiner
-        form(action =`${routes.users}${routes.editProfile}`, method = "post")
-            input(type="text", placeholder="Name", name="Name")
-            input(type="email", placeholder="Email", name="email")
+        form(action =`${routes.editProfile(user._id)}`, method = "post")
+            input(type="text", placeholder="Name", name="name", value=user.name)
+            input(type="email", placeholder="Email", name="email", value=user.email)
             input(type="submit",value="update Profile") 
             //- file 파일불러오기 UI, submit 클릭하면 그것을 제출. 
-        a.form-container_link(href=`${routes.users}${routes.changePassword}`) Change Password
+        a.form-container_link(href=`${routes.changePassword(user.id)}`) Change Password
         //- url + url로 ${routes.users} pug에서도 `${}`을 사용하네.

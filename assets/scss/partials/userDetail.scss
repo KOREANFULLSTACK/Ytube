@@ -1,0 +1,22 @@
+.userDetail {
+  margin: 10px;
+  img {
+    border: 1px;
+    border-radius: 10px;
+    padding: 3px;
+    width: 300px;
+    height: 400px;
+  }
+  p {
+    margin: 10px;
+    font-size: 16px;
+  }
+  a {
+    text-decoration: null;
+    span {
+      text-decoration: null;
+      font-size: 22px;
+      margin: 5px;
+    }
+  }
+}

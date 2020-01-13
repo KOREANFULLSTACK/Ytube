@@ -7,6 +7,7 @@ import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
+import flash from "connect-flash";
 //node js 의 npm package import
 
 import routes from "./routers/routes";
@@ -18,7 +19,14 @@ import { localsMiddleware } from "./middlewares";
 import "./passport";
 // my project import
 
-const app = express(); //import한 express를 인스턴트로 만듬
+const app = express();
+/*
+  NODEJS는 수많은 NPM모듈들로 이루어져있고 npm 모듈중, 미들웨어로써 중추역할을 하는 담당하는 녀석이 express.
+  nodejs -> express 는 세트단어이고, (파이썬 쟝고와 같이) 뗄레야 뗴어날 수 없는 사이이다.
+  express는 nodejs의 모듈일 뿐인 걸 기억하자.
+
+  메소드로 예를들면, app.use() app.get() 등등 많이 본적 있는 녀석들을 사용하게 만들어준다.
+*/
 
 //서버가 종료되면 쿠키가 사라지게 되니 쿠키를 저장할 수 있는 몽고DB의 저장소에 저장하자.
 const CookieStore = MongoStore(session);
@@ -60,6 +68,7 @@ app.use(
     store: new CookieStore({ mongooseConnection: mongoose.connection }) //쿠키 Store의 가장 중요한 부분. 몽고와 연결해줘야 몽고 저장소에 저장가능함.
   })
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
