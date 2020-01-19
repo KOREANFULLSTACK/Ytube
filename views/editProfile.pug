@@ -2,7 +2,10 @@ extends layouts/main
 
 block content
      .form-contatiner
-        form(action =`${routes.editProfile(user._id)}`, method = "post")
+        form(action =`${routes.editProfile(user._id)}`, method = "post", enctype="multipart/form-data")
+            label(for="file")
+                h3 Image File
+            input(type="file", id="file", name="imageFile", accept="image/*")
             input(type="text", placeholder="Name", name="name", value=user.name)
             input(type="email", placeholder="Email", name="email", value=user.email)
             input(type="submit",value="update Profile") 

@@ -1,18 +1,53 @@
 extends layouts/main
-
+include mixins/videoPlayer
 
 block content
     .video
         .video_player   
-            video(src=`/${video.fileUrl}`, control = true)
-            a(href=routes.editVideo(video._id)) edit video
-            h5=video.title
+            +videoPlayer({
+                src:video.fileUrl
+            })
+            if loggedUser
+                if  String(video.creator._id) == loggedUser._id
+                    a(href=routes.editVideo(video._id)) 
+                        i.fas.fa-edit
+                        span edit video
+            
+            h1=video.title
+            a(href=routes.userDetail(video.creator._id))
+                span 작성자 #{video.creator.name}
             span 조회수 #{video.views}회
-            p 내용 #{video.description}
-            if video.comments.length === 1
-                span 1 comment
-            else
-                span #{video.comments.length} comments
-        
+            p 내용 
+            .video_player_text 
+                span #{video.description}
+                
+                
+            .video_comment_write
+                if loggedUser
+                    .video_comment_write_user
+                        img(src=`/${loggedUser.avatarUrl}`)
+                        span #{loggedUser.name}
+
+                    .video_comment_write_comment
+                    form(action=routes.videoDetail(video._id), method="post")    
+                        textarea(name="comment",require=true, placeholder="write comment..", cols=40, rows=3, autofocus)
+                        input(type="submit", value="Write Comment")
+                
+            .video_comment
+                .video_comment_view
+                if videoComment.length === 1
+                    span 1 comment
+                else
+                    span #{videoComment.length} comments
+                .video_comment_body 
+                    each comment in comments
+                        .video_comment_body_one
+                            .video_comment_body_one_user
+                                a(href=routes.userDetail(comment.id))
+                                    img(src=`/${comment.avatarUrl}`)
+                                    span #{comment.name}
+                                .video_comment_body_one_user_text
+                                    span  &nbsp;&nbsp;&nbsp;&nbsp; #{comment.text}
+
 
         

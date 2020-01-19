@@ -3,6 +3,7 @@ import multer from "multer";
 //res.locals에 대한 api문서 : https://expressjs.com/ko/api.html#res.locals에 나와있듯이, views폴더내 프로젝트파일들만 접근가능.
 
 const multerVideo = multer({ dest: "uploads/videos/" });
+const multerImage = multer({ dest: "uploads/images/" });
 
 export const localsMiddleware = (req, res, next) => {
   /*
@@ -42,3 +43,5 @@ export const onlyPrivate = (req, res, next) => {
 
 export const uploadVideo = multerVideo.single(`videoFile`);
 //single은 오직 하나의 파일만 올릴수 있음. 'videoFile은 upload의 file의 name변수 video url을 의미.
+
+export const uploadImage = multerImage.single(`imageFile`);

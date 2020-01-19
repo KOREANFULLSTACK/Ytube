@@ -16,6 +16,8 @@ block content
                 url:item.fileUrl,
                 title:item.title,
                 views: item.views,
+                creator:item.creator.name,
+                createdAt:item.createdAt
             })
     //- each 아무거나 내맘대로 변수명 in videos videoController에서 import Video DB로부터 가져온 걸 home에 넘겨줌.
         Controller에 있는 변수와 template에서 쓸 녀석 이름이 무조건 같아야 함.

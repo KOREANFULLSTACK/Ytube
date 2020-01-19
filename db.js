@@ -39,7 +39,3 @@ const handleError = () => console.log("XXXX");
 
 db.once("open", handleOpen);
 db.on("error", handleError);
-
-console.log(video);
-console.log(comment);
-console.log(user);

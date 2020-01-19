@@ -1,14 +1,30 @@
 extends layouts/main
+include mixins/videoBlock
 
 block content
     
     .userDetail
-        img(src=user.avatarUrl)
+        img(src=`/${user.avatarUrl}`)
         
         p name : #{user.name}
         p e-mail: #{user.email}
-        a(href=routes.editProfile(user.id))
-            i.fas.fa-pen-square.fa-2x
-            span Edit Profile
+    
+        if loggedUser
+            a(href=routes.editProfile(user.id))
+                i.fas.fa-pen-square.fa-2x
+                span Edit Profile
+
+    .videos
+        each item in user.videos
+            +videoBlock({
+                id : item._id,
+                url:item.fileUrl,
+                title:item.title,
+                views: item.views,
+                creator:item.creator.name,
+                createdAt:item.createdAt
+            })
+
+
         
         

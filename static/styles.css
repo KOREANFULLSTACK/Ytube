@@ -528,33 +528,6 @@ body {
   font-weight: 400;
   margin: 10px; }
 
-.video_player {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none; }
-  .video_player a {
-    text-decoration: none;
-    font-weight: bolder;
-    border-radius: 20px;
-    font-family: "Fira Sans Condensed", sans-serif;
-    margin: 10px 0px 10px 0px;
-    padding: 10px;
-    width: 120px;
-    text-align: center;
-    background-color: #afeeee; }
-    .video_player a:hover {
-      background-color: #ffe4e1; }
-  .video_player h5 {
-    margin: 10px;
-    font-size: 30px; }
-  .video_player p {
-    margin: 10px;
-    font-size: 16px; }
-  .video_player span {
-    margin: 10px;
-    color: grey;
-    font-size: 14px; }
-
 .form-video {
   display: flex;
   flex-direction: column;
@@ -675,3 +648,79 @@ body {
       text-decoration: null;
       font-size: 22px;
       margin: 5px; }
+
+.video_player {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none; }
+  .video_player a {
+    text-decoration: none;
+    font-weight: bolder;
+    font-family: "Fira Sans Condensed", sans-serif;
+    margin: 10px 0px 10px 0px;
+    padding: 5px; }
+    .video_player a:hover {
+      background-color: #ffe4e1; }
+  .video_player h1 {
+    margin: 10px 0px 10px 0px;
+    font-size: 20px;
+    font-weight: bolder; }
+  .video_player span,
+  .video_player p {
+    margin: 10px 0px 10px 0px;
+    font-size: 16px;
+    color: grey;
+    font-weight: bolder; }
+  .video_player .video_player_text span {
+    margin: 10px 0px 10px 0px;
+    font-size: 16px;
+    color: black; }
+
+.video_comment_write {
+  display: flex;
+  flex-direction: row;
+  margin: 50px 5px 50px 5px; }
+  .video_comment_write .video_comment_write_user img {
+    margin: 10px;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px; }
+  .video_comment_write .video_comment_write_comment {
+    margin-top: 30px; }
+    .video_comment_write .video_comment_write_comment form textarea {
+      margin: 10px;
+      font-family: "Fira Sans Condensed", sans-serif;
+      resize: none;
+      border-width: 1; }
+    .video_comment_write .video_comment_write_comment form input {
+      margin: 10px;
+      font-family: "Fira Sans Condensed", sans-serif;
+      background-color: grey;
+      border-radius: 5px; }
+
+.video_comment .video_comment_view span {
+  font-size: 14px;
+  color: grey;
+  font-weight: bolder; }
+
+.video_comment .video_comment_body {
+  margin: 50px; }
+  .video_comment .video_comment_body .video_comment_body_one {
+    margin-top: 30px; }
+    .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user {
+      display: flex;
+      flex-direction: column; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user a {
+        width: 200px;
+        text-decoration: none; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user img {
+        border-radius: 10px;
+        width: 30px;
+        height: 30px; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user span {
+        font-size: 18px;
+        color: grey;
+        font-weight: bolder; }
+    .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text span {
+      font-size: 16px;
+      color: black; }

@@ -6,7 +6,19 @@ const UserSchema = new mongoose.Schema({
   email: String,
   avatarUrl: String,
   facebookId: Number,
-  githubId: Number
+  githubId: Number,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment" //outer JOIN Comment스키마와 합치고 comment 스키마에 있는 커멘트와 video스키마에 있는 video의 커멘트에 해당하는 id 컬럼들이 조인한다는 거 같은데.
+    }
+  ],
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video"
+    }
+  ]
 });
 
 /*

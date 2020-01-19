@@ -12,58 +12,20 @@ header.header
         //- html에선 js를 통해 if else해야하지만, pug에서는 호환에서는 가능!
         ul
             if loggedUser
+
                 li
-                    a(href=routes.userDetail(loggedUser.id)) 
-                        img(src=loggedUser.avatarUrl )
+                    a(href=routes.userDetail(loggedUser.id))                     
+                        img(src=`/${loggedUser.avatarUrl}`)
                         p Profile
 
                 li 
                     a(href = `${routes.videos}${routes.upload}`) Upload
                 li
                     a(href=routes.logout) LogOut
-                
+
             else
-                
+            
                 li
                     a(href=routes.join) Join
                 li
                     a(href=routes.login) Login
-
-//- form:사용자의 의견/정보등을 알기위해 입력할 '틀'을 만드는데 사용됨.
-                    input과 다른 점은 input창 그대로이며, input을 품고있는 게 form임.
-                    form안에있는 모든 데이터를 웹서버(node)로 보내고'
-                    처리결과에 따른 새로운 html웹을 서버에서 보낸다.
-
-                    form-action:폼(입력한정보들)을 전송할 서버js파일을 지정 js파일에게 전송
-                    form-method:http메소드 (get or post)
-                    form-name:폼을 식별하기 위한 이름. 폼에 대한 이름.
-
-                    input-name:input에 입력한 내용
-                    name tag를 form에 주는 것과 input에 주는 것을 알자.
-                    form에 name을 주면 routes.search에게 운송하는 트럭의 넘버일뿐
-                    그 트럭안에 어떤 물건이 들어있고 무엇을 옮기는지는 없음.
-                    
-                    얘네들의 정보를 다 추려서 form이 js파일 url + 추가적인정보의 형태로 보낸다.
-                    get:form데이터를 url끝에 붙여 눈에 보이게 보내지만 post는 보이지 않음
-                    'http://localhost:4000/search?input=입력한정보'
-                     http통신이라는게 ?뒷부분에 name에 대한 정보가 들어가도록 약속한 것 같다.
-
-
-
-
-
-
-//-
-    다른 js파일(routers url)에 있는 변수들을 pug에 가져와 쓰는 방법
-    (url변경이 있을 시, 프로젝트 전체를 수정해야 하는 참사방지책)
-    
-    pug(pug server of view engine from expess) - - - middleware - - - router(express server)
-    우리는 router변수를 pug영역에서도 써야하니까, route변수를 local > global로 변형시킬것이다
-    app.js의 middleware선언한 곳으로 가보자
-
-    1) 한템플릿에 추가시키기
-        각 js파일 혹은 pug파일 마다 구별되는 변수가 필요한 상황이라면?
-        videoControleer.js참조해
-    
-    2) 전체템플릿에 추가시키기
-        res.locals.routes = routes 하면 그냥 가져다 쓰면 됨.

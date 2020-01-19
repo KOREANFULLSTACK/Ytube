@@ -30,7 +30,8 @@ export const postJoin = async (req, res, next) => {
     try {
       const user = {
         name,
-        email
+        email,
+        avatarUrl: "uploads/images/d147c76cbdc862957023642f0ab24322"
       };
 
       await User.register(user, password);
@@ -71,23 +72,22 @@ export const githubCallback = async (
   const name = profile._json.name;
   const email = profile._json.email;
   try {
-    const user = await User.findOne({ email }); //email로 유저찾기
-    //user가 존재하면 로그인.
+    const user = await User.findOne({ email });
     if (user) {
       user.githubId = id;
-      user.avatarUrl = avatarUrl;
+      // user.avatarUrl = avatarUrl;
       user.save();
 
-      console.log(user);
       return cb(null, user);
     } else {
       const newUser = await User.create({
         email,
         name,
         githubId: id,
-        avatarUrl
+        avatarUrl: `/uploads\\images\\96ca1b57b5e3415b53243b12caf5750d`
       });
-      console.log(`새로운 고객님 환영합니다`);
+      newUser.save();
+      console.log("새로운유저 : ", newUser);
       return cb(null, newUser);
     }
   } catch (error) {
@@ -132,12 +132,11 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const users = (req, res) => res.render("users", { pageTitle: "Users" });
-
 export const userDetail = async (req, res) => {
   const id = req.params.id;
   try {
-    const user = await User.findById({ _id: id });
+    const user = await User.findById({ _id: id }).populate("videos");
+    console.log("user : ", user.videos);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.send(error);
@@ -153,10 +152,17 @@ export const postEditProfile = async (req, res) => {
   const id = req.user.id;
   const name = req.body.name;
   const email = req.body.email;
-  console.log(("비밀번호  ", req.body.password));
+  var imagePath;
+  if (!req.file) imagePath = req.user.avatarUrl;
+  else imagePath = req.file.path;
+
   try {
-    const user = await User.findOneAndUpdate({ _id: id }, { name, email });
-    res.redirect(routes.userDetail(id));
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      { avatarUrl: imagePath, name, email }
+    );
+    console.log("업데이트했을 때의 유저 : ", user);
+    res.redirect(routes.userDetail(user.id));
   } catch (error) {
     res.send(error);
   }
