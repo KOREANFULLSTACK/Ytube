@@ -52,7 +52,8 @@ export const videoDetail = async (req, res) => {
     const comment = {};
     for (i = 0; i < videoComment.comments.length; i++) {
       comment[i] = {
-        id: String(videoComment.comments[i].creator),
+        creator_id: String(videoComment.comments[i].creator),
+        comment_id: String(videoComment.comments[i].id),
         text: videoComment.comments[i].text,
         createAt: videoComment.comments[i].createdAt
       };
@@ -60,14 +61,11 @@ export const videoDetail = async (req, res) => {
     const length = i;
 
     for (i = 0; i < length; i++) {
-      const tmp = await User.findById(comment[i].id);
+      const tmp = await User.findById(comment[i].creator_id);
       comment[i].name = tmp.name;
       comment[i].avatarUrl = tmp.avatarUrl;
     } //숫자가 작을수록 먼저 작성된 커멘트
 
-    console.log(videoComment.comments[0].creator);
-    console.log(typeof videoComment.comments[0].creator);
-    console.log(videoComment.comments[1].creator);
     res.render("videoDetail", {
       pageTitle: video.title,
       video,
@@ -99,10 +97,25 @@ export const postComment = async (req, res) => {
     console.log("user : ", req.user);
     res.redirect(routes.videoDetail(id));
   } catch (error) {
+    console.log("여긴 포스트커멘트 오버");
+    console.log(error);
     res.redirect(routes.home);
   }
 
   //유저에 커멘트 삽입
+};
+
+export const postDeleteComment = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Comment.findByIdAndDelete(id);
+    console.log("삭제");
+    res.redirect(routes.home);
+  } catch (error) {
+    console.log(error);
+    console.log("fucning!!!");
+    res.redirect(routes.home);
+  }
 };
 
 //video 수정할 때 그 video를 불러오지않으면 없는 video를 수정하게 되는 거니까 로딩락해주자.

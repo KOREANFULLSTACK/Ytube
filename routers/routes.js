@@ -30,6 +30,9 @@ const VIDEO_DETAIL = "/:id"; //"id"는 텍스트 :id 는 변수
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
+const EDIT_COMMENT = "/comment/:id/edit";
+const DELETE_COMMENT = "/comment/:id/delete";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -56,6 +59,14 @@ const routes = {
   naver: NAVER,
   naverCallback: NAVERCALLBACK,
 
+  editComment: id => {
+    if (id) return `/comment/${id}/edit`;
+    else return EDIT_COMMENT;
+  },
+  deleteComment: id => {
+    if (id) return `/comment/${id}/delete`;
+    else return DELETE_COMMENT;
+  },
   videos: VIDEOS,
   upload: UPLOAD,
   videoDetail: id => {

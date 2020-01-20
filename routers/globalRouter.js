@@ -1,6 +1,10 @@
 import express, { response } from "express";
 import routes from "./routes";
-import { home, search } from "../controllers/videoController";
+import {
+  home,
+  search,
+  postDeleteComment
+} from "../controllers/videoController";
 import {
   join,
   postJoin,
@@ -30,6 +34,7 @@ globalRouter.post(routes.login, postLogin);
 
 globalRouter.get(routes.logout, logout);
 globalRouter.get(routes.search, search);
+globalRouter.get(routes.deleteComment(), postDeleteComment);
 
 globalRouter.get(routes.github, githubLogin); //김님으로 계속이라는 페이지를 띄워줌.
 globalRouter.get(

@@ -84,5 +84,4 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter); ///userRouter녀석들 마운팅 어디에? /user에
 app.use(routes.videos, videoRouter);
-
 export default app;

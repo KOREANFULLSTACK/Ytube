@@ -43,11 +43,18 @@ block content
                     each comment in comments
                         .video_comment_body_one
                             .video_comment_body_one_user
-                                a(href=routes.userDetail(comment.id))
+                                a(href=routes.userDetail(comment.creator_id))
                                     img(src=`/${comment.avatarUrl}`)
                                     span #{comment.name}
                                 .video_comment_body_one_user_text
+
                                     span  &nbsp;&nbsp;&nbsp;&nbsp; #{comment.text}
+                                    button.editText
+                                            i.fas.fa-edit
+                                    form(action=routes.deleteComment(comment.comment_id))
+                                        button(type="submit")
+                                             i.fas.fa-times
+                                        span=comment.comment_id
 
 
         
