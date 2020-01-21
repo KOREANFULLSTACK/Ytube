@@ -118,6 +118,25 @@ export const postDeleteComment = async (req, res) => {
   }
 };
 
+export const postEditComment = async (req, res) => {
+  const comment_id = req.params.id;
+  console.log("post Edit comment  ", req.body.text);
+  try {
+    console.log("일단은 성공!");
+
+    const comment = await Comment.findOneAndUpdate(
+      { _id: comment_id },
+      { text: req.body.text }
+    );
+
+    comment.save();
+    res.redirect(routes.home);
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+
 //video 수정할 때 그 video를 불러오지않으면 없는 video를 수정하게 되는 거니까 로딩락해주자.
 export const editVideo = async (req, res) => {
   const id = req.params.id;

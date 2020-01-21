@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./assets/js/commentEdit.js":
+/*!**********************************!*\
+  !*** ./assets/js/commentEdit.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("var comment = document.querySelector(\".video_comment_body\");\nvar classEdit = document.querySelector(\".editButton\");\nvar editButton = classEdit.querySelector(\"button\");\n\nfunction okHandler() {\n  console.log(\"OK\");\n}\n\nfunction editHandler() {\n  var comment_id = event.target.id;\n  var target_comment = event.target.parentNode.parentNode.childNodes[0];\n  console.log(target_comment);\n  var tmp = target_comment.childNodes[1].textContent;\n  console.log(\"tmp : \", tmp);\n  target_comment.removeChild(target_comment.childNodes[1]);\n  console.log(tmp[0]); //새로운 form들 생성 form post/textarea/ button\n\n  var form = document.createElement(\"FORM\");\n  form.action = \"/comment/\".concat(comment_id, \"/delete\");\n  form.method = \"post\";\n  var textarea = document.createElement(\"TEXTAREA\");\n  var text = document.createTextNode(tmp);\n  textarea.name = \"text\";\n  textarea.appendChild(text);\n  var okButton = document.createElement(\"button\"); //type subbit\n\n  okButton.type = \"submit\";\n  var icon = document.createElement(\"i\");\n  icon.className = \"fas fa-check\";\n  okButton.appendChild(icon); //있었던 고정된 텍스트 제거. comment_text에 추가함.\n\n  target_comment.appendChild(form);\n  form.appendChild(textarea);\n  form.appendChild(okButton); //있었던 수정버튼 제거\n\n  var classEdit = event.target.parentNode;\n  classEdit.removeChild(classEdit.childNodes[0]); //새로운버튼생성 form post방식형태로 submit 그리고 새로생긴 버튼에 event리스너 줘야돼\n}\n\nfunction init() {\n  if (editButton) {\n    editButton.addEventListener(\"click\", editHandler);\n  }\n}\n\nif (comment) {\n  init();\n} //tmp.childNodes[1].textContent \"와 바다다!\"\n\n//# sourceURL=webpack:///./assets/js/commentEdit.js?");
+
+/***/ }),
+
 /***/ "./assets/js/main.js":
 /*!***************************!*\
   !*** ./assets/js/main.js ***!
@@ -94,7 +105,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoPlayer */ \"./assets/js/videoPlayer.js\");\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack:///./assets/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoPlayer */ \"./assets/js/videoPlayer.js\");\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _commentEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commentEdit */ \"./assets/js/commentEdit.js\");\n/* harmony import */ var _commentEdit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_commentEdit__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n//# sourceURL=webpack:///./assets/js/main.js?");
 
 /***/ }),
 
