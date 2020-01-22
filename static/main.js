@@ -86,48 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/js/commentEdit.js":
-/*!**********************************!*\
-  !*** ./assets/js/commentEdit.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("var comment = document.querySelector(\".video_comment_body\");\nvar classEdit = document.querySelector(\".editButton\");\nvar editButton = classEdit.querySelector(\"button\");\n\nfunction okHandler() {\n  console.log(\"OK\");\n}\n\nfunction editHandler() {\n  var comment_id = event.target.id;\n  var target_comment = event.target.parentNode.parentNode.childNodes[0];\n  console.log(target_comment);\n  var tmp = target_comment.childNodes[1].textContent;\n  console.log(\"tmp : \", tmp);\n  target_comment.removeChild(target_comment.childNodes[1]);\n  console.log(tmp[0]); //새로운 form들 생성 form post/textarea/ button\n\n  var form = document.createElement(\"FORM\");\n  form.action = \"/comment/\".concat(comment_id, \"/delete\");\n  form.method = \"post\";\n  var textarea = document.createElement(\"TEXTAREA\");\n  var text = document.createTextNode(tmp);\n  textarea.name = \"text\";\n  textarea.appendChild(text);\n  var okButton = document.createElement(\"button\"); //type subbit\n\n  okButton.type = \"submit\";\n  var icon = document.createElement(\"i\");\n  icon.className = \"fas fa-check\";\n  okButton.appendChild(icon); //있었던 고정된 텍스트 제거. comment_text에 추가함.\n\n  target_comment.appendChild(form);\n  form.appendChild(textarea);\n  form.appendChild(okButton); //있었던 수정버튼 제거\n\n  var classEdit = event.target.parentNode;\n  classEdit.removeChild(classEdit.childNodes[0]); //새로운버튼생성 form post방식형태로 submit 그리고 새로생긴 버튼에 event리스너 줘야돼\n}\n\nfunction init() {\n  if (editButton) {\n    editButton.addEventListener(\"click\", editHandler);\n  }\n}\n\nif (comment) {\n  init();\n} //tmp.childNodes[1].textContent \"와 바다다!\"\n\n//# sourceURL=webpack:///./assets/js/commentEdit.js?");
-
-/***/ }),
-
 /***/ "./assets/js/main.js":
 /*!***************************!*\
   !*** ./assets/js/main.js ***!
   \***************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoPlayer */ \"./assets/js/videoPlayer.js\");\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _commentEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commentEdit */ \"./assets/js/commentEdit.js\");\n/* harmony import */ var _commentEdit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_commentEdit__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n//# sourceURL=webpack:///./assets/js/main.js?");
-
-/***/ }),
-
-/***/ "./assets/js/videoPlayer.js":
-/*!**********************************!*\
-  !*** ./assets/js/videoPlayer.js ***!
-  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var videoContainer = document.getElementById(\"jsVideoPlayer\");\nvar videoPlayer = document.querySelector(\"#jsVideoPlayer video\");\nvar playBtn = document.getElementById(\"jsPlayButton\");\nvar volumeBtn = document.getElementById(\"jsVolumeButton\");\nvar screenBtn = document.getElementById(\"jsScreen\");\n\nfunction handlePlayClick() {\n  if (videoPlayer.paused) {\n    videoPlayer.play();\n    i = playBtn.querySelector(\"i\");\n    i.className = \"fas fa-pause\";\n  } else {\n    videoPlayer.pause();\n    i = playBtn.querySelector(\"i\");\n    i.className = \"fas fa-play\";\n  }\n}\n\nfunction handleVolumeClick() {\n  var i = volumeBtn.querySelector(\"i\");\n\n  if (videoPlayer.volume === 0) {\n    videoPlayer.volume = 0.5;\n    i.className = \"fas fa-volume-up\";\n  } else {\n    videoPlayer.volume = 0;\n    i.className = \"fas fa-volume-mute\";\n  }\n}\n\nfunction handleScreen() {\n  var i = screenBtn.querySelector(\"i\");\n  videoPlayer.requestFullscreen();\n  /* \r\n  if (fullScreen) {\r\n    i.className = \"fas fa-compress-alt\";\r\n    fullScreen = 1;\r\n  } else {\r\n    i.className = \"fas fa-expand\";\r\n    fullScreen = 0;\r\n  } */\n}\n\nfunction init() {\n  videoPlayer.onloadedmetadata = function () {\n    var span = document.querySelector(\"#jsDuration\");\n\n    if (videoPlayer) {\n      span.innerText = videoPlayer.duration;\n    } else {\n      span.innerText = \"No Video\";\n    }\n  };\n\n  playBtn.addEventListener(\"click\", handlePlayClick);\n  volumeBtn.addEventListener(\"click\", handleVolumeClick);\n  screenBtn.addEventListener(\"click\", handleScreen);\n}\n\nif (videoContainer) {\n  init();\n}\n\n//# sourceURL=webpack:///./assets/js/videoPlayer.js?");
-
-/***/ }),
-
-/***/ "./assets/scss/styles.scss":
-/*!*********************************!*\
-  !*** ./assets/scss/styles.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./assets/scss/styles.scss?");
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: Cannot find module '@babel/plugin-transform-runtime' from 'C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube'\\n    at Function.module.exports [as sync] (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\resolve\\\\lib\\\\sync.js:74:15)\\n    at resolveStandardizedName (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\files\\\\plugins.js:101:31)\\n    at resolvePlugin (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\files\\\\plugins.js:54:10)\\n    at loadPlugin (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\files\\\\plugins.js:62:20)\\n    at createDescriptor (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-descriptors.js:154:9)\\n    at C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-descriptors.js:109:50\\n    at Array.map (<anonymous>)\\n    at createDescriptors (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-descriptors.js:109:29)\\n    at createPluginDescriptors (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-descriptors.js:105:10)\\n    at plugins (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-descriptors.js:40:19)\\n    at mergeChainOpts (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-chain.js:319:26)\\n    at C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-chain.js:283:7\\n    at buildRootChain (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\config-chain.js:120:22)\\n    at loadPrivatePartialConfig (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\partial.js:85:55)\\n    at Object.loadPartialConfig (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\@babel\\\\core\\\\lib\\\\config\\\\partial.js:110:18)\\n    at Object.<anonymous> (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:144:26)\\n    at Generator.next (<anonymous>)\\n    at asyncGeneratorStep (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:3:103)\\n    at _next (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:5:194)\\n    at C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:5:364\\n    at new Promise (<anonymous>)\\n    at Object.<anonymous> (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:5:97)\\n    at Object.loader (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:60:18)\\n    at Object.<anonymous> (C:\\\\Users\\\\김영민\\\\Desktop\\\\Ytube\\\\node_modules\\\\babel-loader\\\\lib\\\\index.js:55:12)\");\n\n//# sourceURL=webpack:///./assets/js/main.js?");
 
 /***/ })
 

@@ -5,15 +5,13 @@ mixin videoPlayer(video = {})
             .videoPlayer__column
                 span#jsPlayButton
                     i.fas.fa-play
+            
+                sapn#currentTime 00:00 
+                |/
+                span#totalTime 10:00
             .videoPlayer__column
-                span#jsDuration
-                    |00:00 / 10:00
                 span#jsVolumeButton
                     i.fas.fa-volume-up
+            .videoPlayer__column
                 span#jsScreen
                     i.fas.fa-expand
-                
-
-
-            .videoPlayer__column
-                span

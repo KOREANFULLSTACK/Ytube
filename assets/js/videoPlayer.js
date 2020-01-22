@@ -3,7 +3,10 @@ const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeButton");
 const screenBtn = document.getElementById("jsScreen");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
 
+let time = 0;
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -13,6 +16,7 @@ function handlePlayClick() {
     videoPlayer.pause();
     i = playBtn.querySelector("i");
     i.className = "fas fa-play";
+    clearInterval(currentVideo);
   }
 }
 function handleVolumeClick() {
@@ -40,19 +44,24 @@ function handleScreen() {
   } */
 }
 
-function init() {
-  videoPlayer.onloadedmetadata = function() {
-    const span = document.querySelector("#jsDuration");
-    if (videoPlayer) {
-      span.innerText = videoPlayer.duration;
-    } else {
-      span.innerText = "No Video";
-    }
-  };
+function currentVideo() {
+  if (time < videoPlayer.duration) {
+    currentTime.innerHTML = time;
+    time++;
+  } else {
+    time = videoPlayer.duration;
+  }
+}
 
+function waitVideo() {
+  totalTime.innerHTML = videoPlayer.duration;
+  setInterval(currentVideo, 1000);
+}
+function init() {
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   screenBtn.addEventListener("click", handleScreen);
+  videoPlayer.addEventListener("loadedmetadata", waitVideo);
 }
 
 if (videoContainer) {

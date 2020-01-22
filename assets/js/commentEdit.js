@@ -1,6 +1,5 @@
 const comment = document.querySelector(".video_comment_body");
 const classEdit = document.querySelector(".editButton");
-const editButton = classEdit.querySelector("button");
 
 function okHandler() {
   console.log("OK");
@@ -44,6 +43,7 @@ function editHandler() {
 }
 
 function init() {
+  const editButton = classEdit.querySelector("button");
   if (editButton) {
     editButton.addEventListener("click", editHandler);
   }
