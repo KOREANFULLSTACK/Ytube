@@ -89,6 +89,7 @@ export const postComment = async (req, res) => {
     const video = await Video.findById(id);
 
     const comment = await Comment.create({ text: req.body.comment });
+    console.log("comment", req.body.comment);
     comment.creator.push(req.user.id);
     req.user.comments.push(comment._id);
 
@@ -120,14 +121,14 @@ export const postDeleteComment = async (req, res) => {
 export const postEditComment = async (req, res) => {
   const comment_id = req.params.id;
 
+  console.log("text ", req.body);
   try {
     const comment = await Comment.findOneAndUpdate(
       { _id: comment_id },
-      { text: req.body.text }
+      { text: req.body.comment }
     );
 
     comment.save();
-    res.end();
   } catch (error) {
     console.log(error);
     res.status(400);
