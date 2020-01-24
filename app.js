@@ -14,6 +14,7 @@ import routes from "./routers/routes";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 import { localsMiddleware } from "./middlewares";
 
 import "./passport";
@@ -82,6 +83,7 @@ app.use(localsMiddleware);
 */
 
 app.use(routes.home, globalRouter);
-app.use(routes.users, userRouter); ///userRouter녀석들 마운팅 어디에? /user에
+app.use(routes.users, userRouter); ///userRouter녀석들 마운팅 어디에? routes.users에
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 export default app;

@@ -46,9 +46,13 @@ export const videoDetail = async (req, res) => {
   try {
     var i;
     let id = req.params.id;
-    const video = await Video.findById(id).populate("creator");
-    const videoComment = await Video.findById(id).populate("comments");
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
 
+    const videoComment = await Video.findById(id).populate("comments");
+    video.views += 1;
+    video.save();
     const comment = {};
     for (i = 0; i < videoComment.comments.length; i++) {
       comment[i] = {
@@ -66,6 +70,7 @@ export const videoDetail = async (req, res) => {
       comment[i].avatarUrl = tmp.avatarUrl;
     } //숫자가 작을수록 먼저 작성된 커멘트
 
+    console.log("video : ", video._id);
     res.render("videoDetail", {
       pageTitle: video.title,
       video,
@@ -81,25 +86,20 @@ export const videoDetail = async (req, res) => {
 export const postComment = async (req, res) => {
   const id = req.params.id;
   try {
-    const comment = await Comment.create({ text: req.body.comment });
+    const video = await Video.findById(id);
 
+    const comment = await Comment.create({ text: req.body.comment });
     comment.creator.push(req.user.id);
     req.user.comments.push(comment._id);
+
     comment.save();
     req.user.save();
 
-    const video = await Video.findById(id);
     video.comments.push(comment._id);
     video.save();
-
-    console.log("comment : ", comment);
-    console.log("Video:  ", video);
-    console.log("user : ", req.user);
-    res.redirect(routes.videoDetail(id));
   } catch (error) {
-    console.log("여긴 포스트커멘트 오버");
     console.log(error);
-    res.redirect(routes.home);
+    res.status(400);
   }
 
   //유저에 커멘트 삽입
@@ -109,31 +109,28 @@ export const postDeleteComment = async (req, res) => {
   const id = req.params.id;
   try {
     await Comment.findByIdAndDelete(id);
-    console.log("삭제");
-    res.redirect(routes.home);
+    res.end();
   } catch (error) {
     console.log(error);
-    console.log("fucning!!!");
-    res.redirect(routes.home);
+
+    res.status(400);
   }
 };
 
 export const postEditComment = async (req, res) => {
   const comment_id = req.params.id;
-  console.log("post Edit comment  ", req.body.text);
-  try {
-    console.log("일단은 성공!");
 
+  try {
     const comment = await Comment.findOneAndUpdate(
       { _id: comment_id },
       { text: req.body.text }
     );
 
     comment.save();
-    res.redirect(routes.home);
+    res.end();
   } catch (error) {
     console.log(error);
-    res.redirect(routes.home);
+    res.status(400);
   }
 };
 
@@ -144,8 +141,7 @@ export const editVideo = async (req, res) => {
   //routes에서 이미 url다 작업해놨으니 editVideo에 들어오면 req.params로 파싱이 가능함.
   try {
     const video = await Video.findById(id);
-    console.log("req.user정보!!!!!!!!", req.user);
-    console.log("현재video의 정보!!!!", video);
+
     res.render("editVideo", { pageTitle: `Edit ${video.title}`, video }); //{video}로 안주면 pug파일에서 인식을 못하더라.
   } catch (error) {
     res.redirect(routes.home);
@@ -167,7 +163,7 @@ export const postEditVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const id = req.params.id;
-
+  console.log("delete : ", req);
   try {
     const video = await Video.findById({ _id: id });
     if (req.user.id === String(video.creator)) {
@@ -196,4 +192,17 @@ export const search = async (req, res) => {
   });
 };
 
-// res.render(".pug", { 색인 : 색인 })
+export const registerView = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const video = await Video.findById({ _id: id });
+    video.views += 1;
+    video.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+    res.end();
+  } finally {
+    res.end();
+  }
+};

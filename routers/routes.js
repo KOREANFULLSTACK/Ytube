@@ -30,8 +30,18 @@ const VIDEO_DETAIL = "/:id"; //"id"는 텍스트 :id 는 변수
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
-const EDIT_COMMENT = "/comment/:id/edit";
-const DELETE_COMMENT = "/comment/:id/delete";
+//API
+const API = "/api";
+const ADD_COMMENT = "/:id/add";
+const EDIT_COMMENT = "/:id/edit";
+const DELETE_COMMENT = "/:id/delete";
+const REGISTER_VIEW = "/:id/view";
+
+/*  
+  조회수 방식의 원리 
+    누군가가 video를 보면 조회수가 올라가기 마련이다 
+    여기서는 비디오를 클릭해서 api/1ddw18921wdq1d/view로 가게되면 조회수가 상승
+*/
 
 const routes = {
   home: HOME,
@@ -59,14 +69,6 @@ const routes = {
   naver: NAVER,
   naverCallback: NAVERCALLBACK,
 
-  editComment: id => {
-    if (id) return `/comment/${id}/edit`;
-    else return EDIT_COMMENT;
-  },
-  deleteComment: id => {
-    if (id) return `/comment/${id}/delete`;
-    else return DELETE_COMMENT;
-  },
   videos: VIDEOS,
   upload: UPLOAD,
   videoDetail: id => {
@@ -81,6 +83,25 @@ const routes = {
   deleteVideo: id => {
     if (id) return `${VIDEOS}/${id}/delete`;
     else return DELETE_VIDEO;
+  },
+
+  //api
+  api: API,
+  addComment: id => {
+    if (id) return `${API}/${id}/add`;
+    return ADD_COMMENT;
+  },
+  editComment: id => {
+    if (id) return `${API}/${id}/edit`;
+    else return EDIT_COMMENT;
+  },
+  deleteComment: id => {
+    if (id) return `${API}/${id}/delete`;
+    else return DELETE_COMMENT;
+  },
+  regiterView: id => {
+    if (id) return `${API}/${id}/view`;
+    else return REGISTER_VIEW;
   }
 };
 
