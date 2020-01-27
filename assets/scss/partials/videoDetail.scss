@@ -98,9 +98,28 @@
         }
       }
       .video_comment_body_one_user_text {
-        span {
-          font-size: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+          background-color: #e7e7e7;
           color: black;
+          border: none;
+        }
+
+        .comment_text {
+          span {
+            font-size: 16px;
+            color: black;
+          }
+        }
+
+        .editButton {
+          border: none;
+        }
+        .deleteCommentBtn {
+          border: none;
         }
       }
     }

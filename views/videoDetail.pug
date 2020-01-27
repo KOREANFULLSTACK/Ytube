@@ -25,11 +25,12 @@ block content
             .video_comment_write
                 if loggedUser
                     .video_comment_write_user
-                        img(src=`/${loggedUser.avatarUrl}`)
-                        span #{loggedUser.name}
+                         a(href=routes.userDetail(loggedUser._id))
+                            img(src=`/${loggedUser.avatarUrl}`)
+                            span #{loggedUser.name}
 
                     .video_comment_write_comment
-                    form
+                    form.addCommentForm
                         input(type="text",name="comment",require=true, placeholder="write comment..", cols=40, rows=3, autofocus)
                         button.addCommentBtn(value="Write Comment")
                             i.fas.fa-edit
@@ -37,10 +38,10 @@ block content
                 
             .video_comment
                 .video_comment_view
-                if videoComment.length === 1
-                    span 1 comment
-                else
-                    span #{videoComment.length} comments
+                    if videoComment.length === 1
+                        span 1 comment
+                    else
+                        span #{videoComment.length} comments
                 .video_comment_body 
                     each comment in comments
                         .video_comment_body_one
@@ -50,14 +51,16 @@ block content
                                     span #{comment.name}
                                 .video_comment_body_one_user_text
                                     .comment_text 
-                                        span  &nbsp;&nbsp;&nbsp;&nbsp; #{comment.text}
-                                    .editButton
-                                        button.editCommentBtn(id=comment.comment_id)
-                                            i.fas.fa-edit
-                                    form()
-                                        button.deleteCommentBtn(id=comment.comment_id)
-                                             i.fas.fa-times
-                                        
+                                        span  #{comment.text}
+                                    if loggedUser
+                                        if loggedUser.id === comment.creator_id
+                                            .editButton
+                                                button.editCommentBtn(id=comment.comment_id)
+                                                    i.fas.fa-edit
+                                            form
+                                                button.deleteCommentBtn(id=comment.comment_id)
+                                                    i.fas.fa-times
+                                            
 
 
 

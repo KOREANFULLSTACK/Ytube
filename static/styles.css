@@ -721,6 +721,18 @@ body {
         font-size: 18px;
         color: grey;
         font-weight: bolder; }
-    .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text span {
-      font-size: 16px;
-      color: black; }
+    .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text button {
+        background-color: #e7e7e7;
+        color: black;
+        border: none; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text .comment_text span {
+        font-size: 16px;
+        color: black; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text .editButton {
+        border: none; }
+      .video_comment .video_comment_body .video_comment_body_one .video_comment_body_one_user_text .deleteCommentBtn {
+        border: none; }

@@ -69,8 +69,6 @@ export const videoDetail = async (req, res) => {
       comment[i].name = tmp.name;
       comment[i].avatarUrl = tmp.avatarUrl;
     } //숫자가 작을수록 먼저 작성된 커멘트
-
-    console.log("video : ", video._id);
     res.render("videoDetail", {
       pageTitle: video.title,
       video,
@@ -89,7 +87,6 @@ export const postComment = async (req, res) => {
     const video = await Video.findById(id);
 
     const comment = await Comment.create({ text: req.body.comment });
-    console.log("comment", req.body.comment);
     comment.creator.push(req.user.id);
     req.user.comments.push(comment._id);
 
@@ -98,6 +95,7 @@ export const postComment = async (req, res) => {
 
     video.comments.push(comment._id);
     video.save();
+    console.log("comment", req.body.comment);
   } catch (error) {
     console.log(error);
     res.status(400);
